@@ -3,9 +3,12 @@ package stepdefinitions;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.Select;
 import pages.CommonPage;
 import utility.ConfigurationReader;
 import static java.lang.Integer.parseInt;
+import static stepdefinitions.Hooks.actions;
 import static stepdefinitions.Hooks.driver;
 import static utility.UI.Utilities.*;
 
@@ -33,44 +36,53 @@ public class SignUpValid extends CommonPage {
     public void ı_should_see_kendo_uı_plan_and_select_uı_for_react_option_from_try_now_dropdown_list() {
 
         waitForPageToLoad(3);
-        getHomePage().tryNowBtn.click();
+//        getHomePage().cookieAcceptBtn.click();
+
+        scrollToElement(getTryNowPage().tryNowBtn);
+        getTryNowPage().tryNowBtn.click();
         String downloadPageUrl = driver.getCurrentUrl();
         Assert.assertEquals(downloadPageUrl, ConfigurationReader.getProperty("tryNowUrl"));
+
+        actions.sendKeys(Keys.ARROW_DOWN).perform();
+        clickWithJS(getTryNowPage().tryNowBtn);
         clickWithJS(getTryNowPage().uiForReactSelect);
 
     }
 
     @When("I enter valid email and click on Next button")
     public void ıEnterValidEmailAndClickOnNextButton() throws InterruptedException {
-        String loginPageUrl= driver.getCurrentUrl();
-        Assert.assertTrue(loginPageUrl.contains(ConfigurationReader.getProperty("loginUrl")));
+        getTryNowPage().tryNowButton.click();
         getCreateAccountPage().simulateHumanTyping(getLoginPage().emailInputBox, ConfigurationReader.getProperty("valid_email"));
         waitForClickability(getLoginPage().submitButton,10);
         getLoginPage().submitButton.click();
     }
-
-//    @Then("I enter again when necessary")
-//    public void ıEnterAgainWhenNecessary() throws InterruptedException {
-//
-//        if(getLoginPage().submitButton.isDisplayed()) {
-//            getCreateAccountPage().simulateHumanTyping(getLoginPage().emailInputBox, fakeEmail);
-//            waitAndClickWithJS(getLoginPage().submitButton, 3);
-//            waitForPageToLoad(3);
-//        }else{
-//            waitForPageToLoad(3);
-//        }
-//
-//    }
 
     @And("I enter valid password, First Name and Last Name Company, Phone")
     public void ıEnterValidPasswordFirstNameAndLastNameCompanyPhone()  {
 
         getCreateAccountPage().passwordInputBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
         getCreateAccountPage().firstNameInputBox.sendKeys(faker.name().firstName());
-//        getCreateAccountPage().lastNameInputBox.sendKeys(faker.name().lastName());
-//        getCreateAccountPage().companyInputBox.sendKeys(faker.company().name());
-//        getCreateAccountPage().phoneInputBox.sendKeys(faker.phoneNumber().phoneNumber());
+        getCreateAccountPage().lastNameInputBox.sendKeys(faker.name().lastName());
+        getCreateAccountPage().companyInputBox.sendKeys(faker.company().name());
+        getCreateAccountPage().phoneInputBox.sendKeys(faker.phoneNumber().cellPhone());
 
     }
 
+    @And("I select {string} from the Country of Residence dropdown list")
+    public void ıSelectStringFromTheCountryOfResidenceDropdownList(String arg0) {
+        getCreateAccountPage().countryDropdown.click();
+        getCreateAccountPage().countryDropdown.sendKeys(ConfigurationReader.getProperty("countryName"));
+    }
+
+    @And("I select {string} option from Businees Need input")
+    public void ıSelectStringOptionFromBusineesNeedInput() {
+        getCreateAccountPage().bussinessNeedDropdown.click();
+        Select select =new Select(getCreateAccountPage().lookingForTestToolOpt);
+        select.selectByVisibleText(ConfigurationReader.getProperty("selectOptForBussNeed"));
+    }
+
+    @And("I click on {string} button")
+    public void ıClickOnButton(String arg0) {
+        getCreateAccountPage().createAccBtn.click();
+    }
 }

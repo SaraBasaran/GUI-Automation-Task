@@ -22,14 +22,20 @@ public class CreateAccountPage extends CommonPage{
     @FindBy(id="phone")
     public WebElement phoneInputBox;
 
-    @FindBy(id="country")
+    @FindBy(xpath="//div[@role=\"region\"]")
     public WebElement countrySelectBox;
 
     @FindBy(css=".k-searchbar")
     public WebElement countryDropdown;
 
-    @FindBy(id="cb580104-4bec-4696-808a-0b5f6fea29f8")
+    @FindBy(id="business-need")
     public WebElement bussinessNeedDropdown;
+
+    @FindBy(xpath="//button[@aria-label=\"Select\"]")
+    public WebElement lookingForTestToolOpt;
+
+    @FindBy(xpath="//button[@type=\"submit\"]")
+    public WebElement createAccBtn;
 
     public void simulateHumanTyping(WebElement webElement, String input) throws InterruptedException {
 
