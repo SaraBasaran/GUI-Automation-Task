@@ -9,9 +9,9 @@ public class HomePage extends CommonPage{
     public WebElement freeTrialBtn;
 
     @FindBy(xpath = "//div[@data-tlrk-plugin=\"dropdown\"]")
-    public WebElement tryNowBtn;
+    public WebElement tryNowBtnAtHp;
 
-    @FindBy(xpath = "//button[text()='Accept Cookies']")
+    @FindBy(css = "#onetrust-accept-btn-handler")
     public WebElement cookieAcceptBtn;
 
 
