@@ -1,10 +1,11 @@
 package pages;
-
 import org.openqa.selenium.support.PageFactory;
 import static stepdefinitions.Hooks.driver;
 
 public abstract class CommonPage {
 
+    //create an abstract class not to create an object in every required stepdefinition class
+    // this way is ideal for specifically large-scale projects
     public CommonPage() {
         PageFactory.initElements(driver, this);
     }
@@ -18,7 +19,7 @@ public abstract class CommonPage {
         if (homePage == null){
             homePage = new HomePage();
         }
-        return homePage;  // return the instance of Homepage class thus we do not to create a new instance in every needed test class.
+        return homePage;  // return the instance of Homepage class thus we do not to create a new instance in every needed test class repeatedly.
     }
 
     public TryNowPage getTryNowPage() {

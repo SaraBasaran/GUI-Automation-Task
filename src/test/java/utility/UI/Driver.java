@@ -1,4 +1,4 @@
-package utility;
+package utility.UI;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -21,8 +21,7 @@ import static stepdefinitions.Hooks.*;
 public class Driver {
 
     /*
-     Creating the private constructor so this class' object
-     is not reachable from outside
+     Creating the private constructor so this class' object not to reach from other classes and to save driver object(encapsulation)
       */
     private Driver() {
     }
@@ -47,8 +46,7 @@ public class Driver {
 //*********** We can see browser opening if we assign false for the headless variable **************************
         isHeadless = false;
 
-        // Extent Report'un Türkçe desteği olmadığından Spark Report'u oluşturabilmesi için eklendi
-//        Locale.setDefault(new Locale("EN"));
+//        Locale.setDefault(new Locale("EN")); --> to generate Spark Report with Extent Report
         Locale.setDefault(new Locale.Builder().setLanguage("en").build());
         System.setProperty("user.language", "en");
 
@@ -90,7 +88,6 @@ public class Driver {
 
         }
 
-
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.addArguments("use-fake-ui-for-media-stream");
 
@@ -98,8 +95,8 @@ public class Driver {
             synchronized (Driver.class) {
 
             /*
-            We read our browser type from configuration.properties file using
-            .getProperty method we create in ConfigurationReader class.
+            driver instance reaches browser type from configuration.properties file using
+            ConfigurationReader.getProperty() method created in ConfigurationReader class.
              */
                 // String browserType = ConfigurationReader.getProperty("browser");
 
