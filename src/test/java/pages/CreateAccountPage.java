@@ -6,6 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Random;
 
 public class CreateAccountPage extends CommonPage{
+    // By extending this class to CommonPage, all class data type objects are reachable from the child classes.
+    // CreateAccountPage is the sub/child class of CommonPage abstract class.
+    // All selectors/locators related with the CreateAccountPage are stored in this class under pages package.
+    // This way makes codes have atomic structure.
 
     @FindBy(css = "input#password")
     public WebElement passwordInputBox;
@@ -25,20 +29,20 @@ public class CreateAccountPage extends CommonPage{
     @FindBy(xpath = "(//button[@aria-label=\"Select\"])[1]")
     public WebElement countryDropdownSelectListBtn;
 
-    @FindBy(tagName="kendo-combobox")
+    @FindBy(xpath="(//input[@aria-haspopup=\"listbox\"])[1]")
     public WebElement countryInputBoxArea;
 
     @FindBy(id="business-need")
     public WebElement bussinessNeedDropdown;
 
-    @FindBy(xpath="//button[@aria-label=\"Select\"]")
+    @FindBy(xpath="(//span[@class=\"k-list-item-text\"])[5]")
     public WebElement lookingForTestToolOpt;
 
-    @FindBy(xpath="//button[@type=\"submit\"]")
+    @FindBy(xpath="//*[text()='Create Account']")
     public WebElement createAccBtn;
 
     public void simulateHumanTyping(WebElement webElement, String input) throws InterruptedException {
-
+    // code snippet to handle grecaptcha bots.
         Random r = new Random();
 
         for (int i = 0; i < input.length(); i++) {
@@ -50,6 +54,4 @@ public class CreateAccountPage extends CommonPage{
             webElement.sendKeys(s);
         }
     }
-
-
 }

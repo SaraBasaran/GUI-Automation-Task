@@ -1,13 +1,12 @@
-package utility;
+package utility.UI;
 import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ConfigurationReader {
 
-    // ConfigurationReader classını .properties dosyasını okumak için oluşturuyoruz.
-    public static Properties properties;
-    // static yaptık çünkü nesne oluşturmadan doğrudan erişim sağlamak istedik
-    static {
+    // ConfigurationReader class is created to read data from configuration.properties file.
+    public static Properties properties;  // make static to call from everywhere of the project
+        static {
 
         String path = "src/test/resources/configuration.properties";
 
