@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class TryNowPage extends CommonPage{
 
-    @FindBy(xpath = "//span[@class=\"Dropdown-arrow\"]")
+    @FindBy(xpath = "(//a[text()='Try now'])[2]")
     public WebElement tryNowBtn;
 
     @FindBy(xpath = "(//a[text()='UI for React'])[1]")

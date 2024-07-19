@@ -22,11 +22,11 @@ public class CreateAccountPage extends CommonPage{
     @FindBy(id="phone")
     public WebElement phoneInputBox;
 
-    @FindBy(xpath="//div[@role=\"region\"]")
-    public WebElement countrySelectBox;
+    @FindBy(xpath = "(//button[@aria-label=\"Select\"])[1]")
+    public WebElement countryDropdownSelectListBtn;
 
-    @FindBy(css=".k-searchbar")
-    public WebElement countryDropdown;
+    @FindBy(tagName="kendo-combobox")
+    public WebElement countryInputBoxArea;
 
     @FindBy(id="business-need")
     public WebElement bussinessNeedDropdown;
