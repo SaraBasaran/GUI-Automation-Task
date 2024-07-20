@@ -41,8 +41,16 @@ public class CreateAccountPage extends CommonPage{
     @FindBy(xpath="//*[text()='Create Account']")
     public WebElement createAccBtn;
 
+    @FindBy(xpath = "//input[@type=\"checkbox\"]")
+    public WebElement humanCFcheckbox;
+
+    @FindBy(xpath = "//*[text()='Thank You for Signing Up!']")
+    public WebElement thankYouMsg;
+
+
+
     public void simulateHumanTyping(WebElement webElement, String input) throws InterruptedException {
-    // code snippet to handle grecaptcha bots.
+    // I want to present my code snippet to handle grecaptcha bots.
         Random r = new Random();
 
         for (int i = 0; i < input.length(); i++) {
