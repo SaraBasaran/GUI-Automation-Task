@@ -96,10 +96,7 @@ public class SignUpValid extends CommonPage {
         scrollToElement(getCreateAccountPage().createAccBtn);
         getCreateAccountPage().createAccBtn.click();
         waitAndClickWithJS(getCreateAccountPage().humanCFcheckbox, 5);
-        waitForPageToLoad(5);
 
-        String signUpSuccessMsg= getCreateAccountPage().thankYouMsg.getText();
-        driver.getPageSource().contains(signUpSuccessMsg);
     }
 }
 

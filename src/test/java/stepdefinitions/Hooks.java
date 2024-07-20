@@ -16,7 +16,7 @@ public class Hooks {
 
     // In this class we configure WebDriver object.
     public static WebDriver driver;  //WebDriver instance resourced from Selenium.
-    public static boolean isHeadless = false;  // to set the driver headless for testing on cloud browsers
+    public static boolean isHeadless = true;  // to set the driver headless for testing on cloud browsers
     public static String browserType = ConfigurationReader.getProperty("browserType"); // to reach the data in configuration.properties file
                                                                                        // and use it as a dynamic browser type
 

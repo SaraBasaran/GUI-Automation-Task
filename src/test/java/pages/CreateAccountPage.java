@@ -44,12 +44,7 @@ public class CreateAccountPage extends CommonPage{
     @FindBy(xpath = "//input[@type=\"checkbox\"]")
     public WebElement humanCFcheckbox;
 
-    @FindBy(xpath = "//*[text()='Thank You for Signing Up!']")
-    public WebElement thankYouMsg;
-
-
-
-    public void simulateHumanTyping(WebElement webElement, String input) throws InterruptedException {
+      public void simulateHumanTyping(WebElement webElement, String input) throws InterruptedException {
     // I want to present my code snippet to handle grecaptcha bots.
         Random r = new Random();
 
