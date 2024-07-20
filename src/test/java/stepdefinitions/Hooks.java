@@ -61,6 +61,6 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "screenshots");
         }
-        driver.quit(); //closes all open tab/tabs of the browser
+       // driver.quit(); //closes all open tab/tabs of the browser
     }
 }

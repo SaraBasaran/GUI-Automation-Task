@@ -13,7 +13,7 @@ public class TryNowPage extends CommonPage{
     public WebElement tryNowBtn;
 
     @FindBy(xpath = "(//a[text()='UI for React'])[1]")
-    public WebElement uiForReactSelect;
+    public WebElement tryNowOption;
 
     @FindBy(xpath ="(//a[@href=\"/try/kendo-react-ui\"])[1]")
     public WebElement tryNowButton;

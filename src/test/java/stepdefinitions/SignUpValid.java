@@ -30,15 +30,20 @@ public class SignUpValid extends CommonPage {
         waitAndClickWithJS( getHomePage().freeTrialBtn, 3);
     }
 
-    @When("I should see Kendo UI Plan and select UI for React option from Try Now dropdown list")
-    public void ı_should_see_kendo_uı_plan_and_select_uı_for_react_option_from_try_now_dropdown_list() {
+    @And("I should see {string} and select {string} option from Try Now dropdown list")
+    public void ıShouldSeeAndSelectOptionFromTryNowDropdownList(String planOption, String tryOption) {
         waitForPageToLoad(3);
+        planOption=ConfigurationReader.getProperty("planOption"); //getting the value "Kendo UI Plan" from config properties
+        tryOption= ConfigurationReader.getProperty("tryNowOption"); //getting the value "Kendo UI Try Now" from config properties
         String downloadPageUrl = driver.getCurrentUrl();
         Assert.assertEquals(downloadPageUrl, ConfigurationReader.getProperty("tryNowUrl"));
+        driver.getPageSource().contains(planOption);
+
         scrollToElement(getTryNowPage().tryNowBtn);
         actions.sendKeys(Keys.DOWN).perform();
         clickWithJS(getTryNowPage().tryNowBtn);
-        clickWithJS(getTryNowPage().uiForReactSelect);
+
+        clickWithJS(getTryNowPage().tryNowOption);
         getTryNowPage().tryNowButton.click();
     }
 
@@ -57,7 +62,6 @@ public class SignUpValid extends CommonPage {
         // or to have always "new usable and valid data" we can use java Faker class objects to produce fake name, fake email, etc.
         waitForPageToLoad(3);
         String createAccPageUrl= driver.getCurrentUrl();
-        System.out.println("createAccPageUrl = " + createAccPageUrl);
         Assert.assertTrue(createAccPageUrl.contains(ConfigurationReader.getProperty("createAccountUrl")));
         getCreateAccountPage().passwordInputBox.sendKeys(ConfigurationReader.getProperty("valid_password"));
         getCreateAccountPage().firstNameInputBox.sendKeys(faker.name().firstName());
@@ -66,19 +70,23 @@ public class SignUpValid extends CommonPage {
         getCreateAccountPage().phoneInputBox.sendKeys(faker.phoneNumber().cellPhone());
     }
 
-    @When("I select Egypt from the Country of Residence dropdown list")
-    public void ı_select_egypt_from_the_country_of_residence_dropdown_list() {
+    @And("I select {string} from the Country of Residence dropdown list")
+    public void ıSelectFromTheCountryOfResidenceDropdownList(String country) {
+        //getting the value "Egypt" from config properties and using it in the test case
+        country= ConfigurationReader.getProperty("countryName");
         scrollToElement(getCreateAccountPage().countryDropdownSelectListBtn);
         waitAndClickWithJS(getCreateAccountPage().countryDropdownSelectListBtn, 3);
         //adding explicit wait to interact with the webelement and actually does not wait 5 seconds
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(getCreateAccountPage().countryInputBoxArea));
         waitAndClickWithJS(getCreateAccountPage().countryInputBoxArea, 3);
-        getCreateAccountPage().countryInputBoxArea.sendKeys(ConfigurationReader.getProperty("countryName"));
+        getCreateAccountPage().countryInputBoxArea.sendKeys(country);
     }
 
-    @When("I select Looking for a Testing Tool option from Business Need input")
-    public void ı_select_looking_for_a_testing_tool_option_from_business_need_input() {
+    @And("I select {string} option from Business Need input")
+    public void ıSelectOptionFromBusinessNeedInput(String businessNeedOption)  {
+        //getting the value "Testing Tool" from config properties and using it in the test case
+        businessNeedOption=ConfigurationReader.getProperty("businessNeedOption");
         getCreateAccountPage().bussinessNeedDropdown.click();
         waitAndClickWithJS(getCreateAccountPage().lookingForTestToolOpt, 5);
     }
@@ -87,6 +95,11 @@ public class SignUpValid extends CommonPage {
     public void ı_click_on_create_account_button() {
         scrollToElement(getCreateAccountPage().createAccBtn);
         getCreateAccountPage().createAccBtn.click();
+        waitAndClickWithJS(getCreateAccountPage().humanCFcheckbox, 5);
+        waitForPageToLoad(5);
+
+        String signUpSuccessMsg= getCreateAccountPage().thankYouMsg.getText();
+        driver.getPageSource().contains(signUpSuccessMsg);
     }
 }
 
